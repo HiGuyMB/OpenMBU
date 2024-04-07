@@ -329,6 +329,7 @@ function PlayGui::setMaxGems(%this,%count)
    
    GemsSlash.setVisible(%visible);
    SUMO_NegSign.setVisible(false);
+   HUNT_GemPredictor.setVisible(false);
 
    //HUD_ShowGem.setModel("marble/data/shapes/items/gem.dts","");
 }
@@ -514,6 +515,28 @@ function PlayGui::updateControls(%this)
    	TimeBox.animBitmap("timebackdrop");
    	%this.lastHundredth = %hundredth;
 	}
+   
+   %predictor = $Game::SPGemHunt && $pref::GemPredictor;
+   HUNT_GemPredictor.setVisible(%predictor);
+   if (%predictor)
+   {
+      // gems found / (time passed / total time)
+      // gems found * total time / time passed
+      %lowResDuration = mFloor(PlayGui.gameDuration / 1000);
+      %lowResElapsed = mFloor(%this.elapsedTime / 1000);
+      %predict = %this.points * %lowResDuration / %lowResElapsed;
+      %predict = mFloor(%predict);
+
+      %text = "<color:ffffff>"
+         @ "(" @ mFloor(%predict) @ ")"
+         SPC "<spush><color:ff6633>" @ ($Client::GemCountAmount[1] + 0) @ "<spop>"
+         SPC "<spush><color:ffff00>" @ ($Client::GemCountAmount[2] + 0) @ "<spop>"
+         SPC "<spush><color:3366ff>" @ ($Client::GemCountAmount[5] + 0) @ "<spop>"
+         SPC "<spush><color:111111>" @ $Client::OOBCount @ "<spop>"
+         ;
+
+      HUNT_GemPredictor.setText("<shadow:2:2><shadowcolor:0000007f><font:Arial Bold:24>" @ %text);
+   }
 }
 
 function PlayGui::scaleGemArrows(%this)

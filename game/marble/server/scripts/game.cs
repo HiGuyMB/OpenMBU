@@ -1390,7 +1390,7 @@ function GameConnection::onFoundGem(%this,%amount,%gem,%points)
       // send message to everybody except client telling them that he scored
       messageAllExcept(%this, -1, 'MsgClientScoreChanged', "", %this, false, %this.points, %oldPoints);
       
-      commandToClient(%this, 'setPoints', %this, %this.points);
+      commandToClient(%this, 'setPoints', %this, %this.points, %points);
       //if (%points == 1)
       //   messageClient(%this, 'MsgItemPickup', $Text::Tagged::GemPickupOnePoint);
       //else

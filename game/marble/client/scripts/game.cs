@@ -49,6 +49,8 @@ function clientCmdGameStart()
       return;
       
    PlayerListGui.zeroScores();
+   deleteVariables("$Client::GemCountAmount*");
+   $Client::OOBCount = 0;
 
    // Map Pack Achievement code:
    $UserAchievements::MPGotABlueGem = 0;
@@ -110,8 +112,9 @@ function clientCmdSetGemCount(%gems,%maxGems)
    PlayGui.setMaxGems(%maxGems);
 }
 
-function clientCmdSetPoints(%clientid, %points)
+function clientCmdSetPoints(%clientid, %points, %gemAmount)
 {
+   $Client::GemCountAmount[%gemAmount] ++;
    PlayGui.setPoints(%points);
 }
 
@@ -142,6 +145,10 @@ function clientCmdSetMessage(%message,%time)
    {
       $Game::StartPad.stopThread( 0 );
       $Game::StartPad.playThread( 0, "start" );
+   }
+   if( %message $= "outOfBounds" )
+   {
+      $Client::OOBCount ++;
    }
 }
 

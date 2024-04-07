@@ -19,6 +19,7 @@ $pref::useStencilShadows = true;
 $pref::forceDirectConnect = false;
 $pref::ForceSecretMode = false;
 $Pref::DisableSecretMode = false;
+$pref::GemPredictor = false;
 $pref::Input::LinkMouseSensitivity = 1;
 // DInput keyboard, mouse, and joystick prefs
 $pref::displayMPHelpText = false;

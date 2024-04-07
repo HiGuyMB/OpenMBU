@@ -146,6 +146,19 @@ new GuiControl(PlayGui) {
 		      wrap = "0";
 		         helpTag = "0";
 		   };
+           new GuiMLTextCtrl(HUNT_GemPredictor) {
+              Profile = "GuiMLTextProfile";
+              HorizSizing = "relative";
+              VertSizing = "relative";
+              position = "126 22";
+              Extent = "128 14";
+              MinExtent = "8 2";
+              Visible = "0";
+              UIMode = "AlwaysShow";
+              lineSpacing = "2";
+              allowColorChars = "0";
+              maxChars = "-1";
+           };
 	   };
    };
    new GuiBitmapCtrl(TimeBox) {
@@ -670,6 +683,7 @@ function setHudVisible( %visible )
       GemsFoundTen.setVisible( %visible );
       GemsFoundHundred.setVisible( %visible );
       HUD_ShowGem.setVisible( %visible );
+      HUNT_GemPredictor.setVisible( %visible );
 	   CenterMessageDlg.setVisible( %visible );
    }
    else
